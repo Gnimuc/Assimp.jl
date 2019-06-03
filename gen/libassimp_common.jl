@@ -1,5 +1,7 @@
 # Automatically generated using Clang.jl
-
+const aiUVTransform = Cvoid
+const aiTexel = Cvoid
+const aiNode = Cvoid
 
 # Skipping MacroDefinition: SIZE_MAX ( ~ ( ( size_t ) 0 ) )
 # Skipping MacroDefinition: UINT_MAX ( ~ ( ( unsigned int ) 0 ) )
@@ -274,7 +276,6 @@ struct aiMetadata
     aiMetadataEntry::Cint
 end
 
-const ai_assert = expression
 const aiFileOpenProc = Ptr{Cvoid}
 const aiFileCloseProc = Ptr{Cvoid}
 const aiUserData = Cstring
@@ -760,10 +761,10 @@ end
     aiProcess_GlobalScale = 134217728,
 )
 
-const aiProcess_ConvertToLeftHanded = ((aiProcess_MakeLeftHanded | aiProcess_FlipUVs) | aiProcess_FlipWindingOrder) | 0
-const aiProcessPreset_TargetRealtime_Fast = (((((aiProcess_CalcTangentSpace | aiProcess_GenNormals) | aiProcess_JoinIdenticalVertices) | aiProcess_Triangulate) | aiProcess_GenUVCoords) | aiProcess_SortByPType) | 0
-const aiProcessPreset_TargetRealtime_Quality = (((((((((((aiProcess_CalcTangentSpace | aiProcess_GenSmoothNormals) | aiProcess_JoinIdenticalVertices) | aiProcess_ImproveCacheLocality) | aiProcess_LimitBoneWeights) | aiProcess_RemoveRedundantMaterials) | aiProcess_SplitLargeMeshes) | aiProcess_Triangulate) | aiProcess_GenUVCoords) | aiProcess_SortByPType) | aiProcess_FindDegenerates) | aiProcess_FindInvalidData) | 0
-const aiProcessPreset_TargetRealtime_MaxQuality = (((aiProcessPreset_TargetRealtime_Quality | aiProcess_FindInstances) | aiProcess_ValidateDataStructure) | aiProcess_OptimizeMeshes) | 0
+const aiProcess_ConvertToLeftHanded = ((aiProcess_MakeLeftHanded | aiProcess_FlipUVs) | aiProcess_FlipWindingOrder) | UInt32(0)
+const aiProcessPreset_TargetRealtime_Fast = (((((aiProcess_CalcTangentSpace | aiProcess_GenNormals) | aiProcess_JoinIdenticalVertices) | aiProcess_Triangulate) | aiProcess_GenUVCoords) | aiProcess_SortByPType) | UInt32(0)
+const aiProcessPreset_TargetRealtime_Quality = (((((((((((aiProcess_CalcTangentSpace | aiProcess_GenSmoothNormals) | aiProcess_JoinIdenticalVertices) | aiProcess_ImproveCacheLocality) | aiProcess_LimitBoneWeights) | aiProcess_RemoveRedundantMaterials) | aiProcess_SplitLargeMeshes) | aiProcess_Triangulate) | aiProcess_GenUVCoords) | aiProcess_SortByPType) | aiProcess_FindDegenerates) | aiProcess_FindInvalidData) | UInt32(0)
+const aiProcessPreset_TargetRealtime_MaxQuality = (((aiProcessPreset_TargetRealtime_Quality | aiProcess_FindInstances) | aiProcess_ValidateDataStructure) | aiProcess_OptimizeMeshes) | UInt32(0)
 const AI_SCENE_FLAGS_INCOMPLETE = 0x01
 const AI_SCENE_FLAGS_VALIDATED = 0x02
 const AI_SCENE_FLAGS_VALIDATION_WARNING = 0x04
