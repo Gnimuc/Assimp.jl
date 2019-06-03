@@ -1,5 +1,6 @@
 module Assimp
 
-greet() = print("Hello World!")
+include("LibAssimp.jl")
+using .LibAssimp
 
 end # module
