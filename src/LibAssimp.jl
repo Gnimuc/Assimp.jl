@@ -1,18 +1,6 @@
 module LibAssimp
 
-import Libdl
-
-# Load in `deps.jl`, complaining if it does not exist
-const depsjl_path = joinpath(@__DIR__, "..", "deps", "deps.jl")
-if !isfile(depsjl_path)
-    error("Assimp was not built properly. Please run Pkg.build(\"Assimp\").")
-end
-include(depsjl_path)
-# Module initialization function
-function __init__()
-    check_deps()
-end
-
+using assimp_jll
 using CEnum
 
 include(joinpath(@__DIR__, "..", "gen", "libassimp_common.jl"))
