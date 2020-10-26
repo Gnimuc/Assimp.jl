@@ -164,6 +164,9 @@ end
 function aiGetImportFormatDescription(pIndex)
     ccall((:aiGetImportFormatDescription, libassimp), Ptr{aiImporterDesc}, (Csize_t,), pIndex)
 end
+# Julia wrapper for header: importerdesc.h
+# Automatically generated using Clang.jl
+
 # Julia wrapper for header: cexport.h
 # Automatically generated using Clang.jl
 

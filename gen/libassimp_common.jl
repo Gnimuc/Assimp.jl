@@ -411,6 +411,28 @@ end
 
 const aiBool = Cint
 
+@cenum aiImporterFlags::UInt32 begin
+    aiImporterFlags_SupportTextFlavour = 1
+    aiImporterFlags_SupportBinaryFlavour = 2
+    aiImporterFlags_SupportCompressedFlavour = 4
+    aiImporterFlags_LimitedSupport = 8
+    aiImporterFlags_Experimental = 16
+end
+
+
+struct aiImporterDesc
+    mName::Cstring
+    mAuthor::Cstring
+    mMaintainer::Cstring
+    mComments::Cstring
+    mFlags::UInt32
+    mMinMajor::UInt32
+    mMinMinor::UInt32
+    mMaxMajor::UInt32
+    mMaxMinor::UInt32
+    mFileExtensions::Cstring
+end
+
 struct aiExportFormatDesc
     id::Cstring
     description::Cstring
