@@ -1,22 +1,20 @@
 using Clang
+# using Assimp.LibAssimp.assimp_jll
+using assimp_jll
 
-const ASSIMP_INCLUDE = joinpath(@__DIR__, "..", "deps", "usr", "include") |> normpath
-const EXCLUDES = ["DefaultIOStream.h", "DefaultIOSystem.h"]
-const ASSIMP_HEADERS = String[]
-for (root, dirs, files) in walkdir(ASSIMP_INCLUDE), file in files
-    n = basename(file)
-    if endswith(n, ".h") && n ∉ EXCLUDES
-        push!(ASSIMP_HEADERS, joinpath(root, file))
-    end
-end
+const ASSIMP_INCLUDE = joinpath(dirname(assimp_jll.libassimp_path), "..", "include") |> normpath
+const C_INTERFACE_HEADERS = ["defs.h", "vector2.h", "vector3.h", "matrix3x3.h", "matrix4x4.h", "color4.h", "types.h", "aabb.h",
+                             "cfileio.h", "cimport.h", "cexport.h", "material.h", "scene.h", "texture.h", "quaternion.h",
+                             "pbrmaterial.h", "mesh.h", "light.h", "anim.h", "camera.h", "metadata.h", "version.h"]
+const ASSIMP_HEADERS = [joinpath(ASSIMP_INCLUDE, "assimp", h) for h in C_INTERFACE_HEADERS]
 
 # create a work context
 ctx = DefaultContext()
 
 # parse headers
-stdlibs = @static Sys.isapple() ? ["-I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk/usr/include"] : [""]
-parse_headers!(ctx, ASSIMP_HEADERS, args=stdlibs, includes=[LLVM_INCLUDE, ASSIMP_INCLUDE])
-
+parse_headers!(ctx, ASSIMP_HEADERS,
+               args=[map(x->"-I"*x, find_std_headers())...],
+               includes=[ASSIMP_INCLUDE, CLANG_INCLUDE])
 # settings
 ctx.libname = "libassimp"
 ctx.options["is_function_strictly_typed"] = false
@@ -40,7 +38,7 @@ for trans_unit in ctx.trans_units
         # choose which cursor to wrap
         startswith(child_name, "__") && continue  # skip compiler definitions
         child_name in keys(ctx.common_buffer) && continue  # already wrapped
-        child_header != header && continue  # skip if cursor filename is not in the headers to be wrapped
+        child_header != header && continue
 
         wrap!(ctx, child)
     end

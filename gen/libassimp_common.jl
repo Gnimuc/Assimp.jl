@@ -1,17 +1,30 @@
 # Automatically generated using Clang.jl
-const aiUVTransform = Cvoid
-const aiTexel = Cvoid
-const aiNode = Cvoid
 
-# Skipping MacroDefinition: SIZE_MAX ( ~ ( ( size_t ) 0 ) )
-# Skipping MacroDefinition: UINT_MAX ( ~ ( ( unsigned int ) 0 ) )
 
-const AI_INT_MERGE_SCENE_GEN_UNIQUE_NAMES = 0x01
-const AI_INT_MERGE_SCENE_GEN_UNIQUE_MATNAMES = 0x02
-const AI_INT_MERGE_SCENE_DUPLICATES_DEEP_CPY = 0x04
-const AI_INT_MERGE_SCENE_RESOLVE_CROSS_ATTACHMENTS = 0x08
-const AI_INT_MERGE_SCENE_GEN_UNIQUE_NAMES_IF_NECESSARY = 0x10
+# Skipping MacroDefinition: ASSIMP_API __attribute__ ( ( visibility ( "default" ) ) )
+# Skipping MacroDefinition: AI_WONT_RETURN_SUFFIX __attribute__ ( ( noreturn ) )
+
+const ASSIMP_AI_REAL_TEXT_PRECISION = 8
+const AI_MATH_PI = 3.141592653589793
+const AI_MATH_TWO_PI = AI_MATH_PI * 2.0
+const AI_MATH_HALF_PI = AI_MATH_PI * 0.5
+const AI_MATH_PI_F = Float32(3.1415926538)
+const AI_MATH_TWO_PI_F = AI_MATH_PI_F * Float32(2.0)
+const AI_MATH_HALF_PI_F = AI_MATH_PI_F * Float32(0.5)
+
+# Skipping MacroDefinition: AI_DEG_TO_RAD ( x ) ( ( x ) * ( ai_real ) 0.0174532925 )
+# Skipping MacroDefinition: AI_RAD_TO_DEG ( x ) ( ( x ) * ( ai_real ) 57.2957795 )
+# Skipping MacroDefinition: AI_MAX_ALLOC ( type ) ( ( 256U * 1024 * 1024 ) / sizeof ( type ) )
+
+# const AI_NO_EXCEPT = noexcept
 const ai_real = Cfloat
+const ai_int = Cint
+const ai_uint = UInt32
+
+struct aiVector2D
+    x::ai_real
+    y::ai_real
+end
 
 struct aiVector3D
     x::ai_real
@@ -19,26 +32,16 @@ struct aiVector3D
     z::ai_real
 end
 
-struct aiColor4D
-    r::ai_real
-    g::ai_real
-    b::ai_real
-    a::ai_real
-end
-
-struct aiFace
-    mNumIndices::UInt32
-    mIndices::Ptr{UInt32}
-end
-
-struct aiString
-    length::Csize_t
-    data::NTuple{1024, UInt8}
-end
-
-struct aiVertexWeight
-    mVertexId::UInt32
-    mWeight::Cfloat
+struct aiMatrix3x3
+    a1::ai_real
+    a2::ai_real
+    a3::ai_real
+    b1::ai_real
+    b2::ai_real
+    b3::ai_real
+    c1::ai_real
+    c2::ai_real
+    c3::ai_real
 end
 
 struct aiMatrix4x4
@@ -60,6 +63,129 @@ struct aiMatrix4x4
     d4::ai_real
 end
 
+struct aiColor4D
+    r::ai_real
+    g::ai_real
+    b::ai_real
+    a::ai_real
+end
+
+const MAXLEN = 1024
+
+@cenum aiReturn::Int32 begin
+    aiReturn_SUCCESS = 0
+    aiReturn_FAILURE = -1
+    aiReturn_OUTOFMEMORY = -3
+    _AI_ENFORCE_ENUM_SIZE = 2147483647
+end
+
+
+const AI_SUCCESS = aiReturn_SUCCESS
+const AI_FAILURE = aiReturn_FAILURE
+const AI_OUTOFMEMORY = aiReturn_OUTOFMEMORY
+
+@cenum aiDefaultLogStream::UInt32 begin
+    aiDefaultLogStream_FILE = 1
+    aiDefaultLogStream_STDOUT = 2
+    aiDefaultLogStream_STDERR = 4
+    aiDefaultLogStream_DEBUGGER = 8
+    _AI_DLS_ENFORCE_ENUM_SIZE = 2147483647
+end
+
+
+const DLS_FILE = aiDefaultLogStream_FILE
+const DLS_STDOUT = aiDefaultLogStream_STDOUT
+const DLS_STDERR = aiDefaultLogStream_STDERR
+const DLS_DEBUGGER = aiDefaultLogStream_DEBUGGER
+const ai_int32 = Int32
+const ai_uint32 = UInt32
+
+struct aiPlane
+    a::ai_real
+    b::ai_real
+    c::ai_real
+    d::ai_real
+end
+
+struct aiRay
+    pos::aiVector3D
+    dir::aiVector3D
+end
+
+struct aiColor3D
+    r::ai_real
+    g::ai_real
+    b::ai_real
+end
+
+struct aiString
+    length::ai_uint32
+    data::NTuple{1024, UInt8}
+end
+
+@cenum aiOrigin::UInt32 begin
+    aiOrigin_SET = 0
+    aiOrigin_CUR = 1
+    aiOrigin_END = 2
+    _AI_ORIGIN_ENFORCE_ENUM_SIZE = 2147483647
+end
+
+
+struct aiMemoryInfo
+    textures::UInt32
+    materials::UInt32
+    meshes::UInt32
+    nodes::UInt32
+    animations::UInt32
+    cameras::UInt32
+    lights::UInt32
+    total::UInt32
+end
+
+struct aiAABB
+    mMin::aiVector3D
+    mMax::aiVector3D
+end
+
+const aiFileOpenProc = Ptr{Cvoid}
+const aiFileCloseProc = Ptr{Cvoid}
+const aiUserData = Cstring
+
+struct aiFileIO
+    OpenProc::aiFileOpenProc
+    CloseProc::aiFileCloseProc
+    UserData::aiUserData
+end
+
+const aiFileReadProc = Ptr{Cvoid}
+const aiFileWriteProc = Ptr{Cvoid}
+const aiFileTellProc = Ptr{Cvoid}
+const aiFileSeek = Ptr{Cvoid}
+const aiFileFlushProc = Ptr{Cvoid}
+
+struct aiFile
+    ReadProc::aiFileReadProc
+    WriteProc::aiFileWriteProc
+    TellProc::aiFileTellProc
+    FileSizeProc::aiFileTellProc
+    SeekProc::aiFileSeek
+    FlushProc::aiFileFlushProc
+    UserData::aiUserData
+end
+
+const AI_FALSE = 0
+const AI_TRUE = 1
+
+struct aiFace
+    mNumIndices::UInt32
+    mIndices::Ptr{UInt32}
+end
+
+struct aiVertexWeight
+    mVertexId::UInt32
+    mWeight::Cfloat
+end
+
 struct aiBone
     mName::aiString
     mNumWeights::UInt32
@@ -68,6 +194,7 @@ struct aiBone
 end
 
 struct aiAnimMesh
+    mName::aiString
     mVertices::Ptr{aiVector3D}
     mNormals::Ptr{aiVector3D}
     mTangents::Ptr{aiVector3D}
@@ -97,16 +224,18 @@ struct aiMesh
     mNumAnimMeshes::UInt32
     mAnimMeshes::Ptr{Ptr{aiAnimMesh}}
     mMethod::UInt32
+    mAABB::aiAABB
 end
 
-@cenum(aiPropertyTypeInfo,
-    aiPTI_Float = 1,
-    aiPTI_Double = 2,
-    aiPTI_String = 3,
-    aiPTI_Integer = 4,
-    aiPTI_Buffer = 5,
-    _aiPTI_Force32Bit = 2147483647,
-)
+@cenum aiPropertyTypeInfo::UInt32 begin
+    aiPTI_Float = 1
+    aiPTI_Double = 2
+    aiPTI_String = 3
+    aiPTI_Integer = 4
+    aiPTI_Buffer = 5
+    _aiPTI_Force32Bit = 2147483647
+end
+
 
 struct aiMaterialProperty
     mKey::aiString
@@ -140,13 +269,14 @@ struct aiQuatKey
     mValue::aiQuaternion
 end
 
-@cenum(aiAnimBehaviour,
-    aiAnimBehaviour_DEFAULT = 0,
-    aiAnimBehaviour_CONSTANT = 1,
-    aiAnimBehaviour_LINEAR = 2,
-    aiAnimBehaviour_REPEAT = 3,
-    _aiAnimBehaviour_Force32Bit = 2147483647,
-)
+@cenum aiAnimBehaviour::UInt32 begin
+    aiAnimBehaviour_DEFAULT = 0
+    aiAnimBehaviour_CONSTANT = 1
+    aiAnimBehaviour_LINEAR = 2
+    aiAnimBehaviour_REPEAT = 3
+    _aiAnimBehaviour_Force32Bit = 2147483647
+end
+
 
 struct aiNodeAnim
     mNodeName::aiString
@@ -201,28 +331,19 @@ struct aiTexture
     mHeight::UInt32
     achFormatHint::NTuple{9, UInt8}
     pcData::Ptr{aiTexel}
+    mFilename::aiString
 end
 
-@cenum(aiLightSourceType,
-    aiLightSource_UNDEFINED = 0,
-    aiLightSource_DIRECTIONAL = 1,
-    aiLightSource_POINT = 2,
-    aiLightSource_SPOT = 3,
-    aiLightSource_AMBIENT = 4,
-    aiLightSource_AREA = 5,
-    _aiLightSource_Force32Bit = 2147483647,
-)
-
-struct aiColor3D
-    r::ai_real
-    g::ai_real
-    b::ai_real
+@cenum aiLightSourceType::UInt32 begin
+    aiLightSource_UNDEFINED = 0
+    aiLightSource_DIRECTIONAL = 1
+    aiLightSource_POINT = 2
+    aiLightSource_SPOT = 3
+    aiLightSource_AMBIENT = 4
+    aiLightSource_AREA = 5
+    _aiLightSource_Force32Bit = 2147483647
 end
 
-struct aiVector2D
-    x::ai_real
-    y::ai_real
-end
 
 struct aiLight
     mName::aiString
@@ -252,9 +373,15 @@ struct aiCamera
     mAspect::Cfloat
 end
 
+struct aiMetadata
+    mNumProperties::UInt32
+    aiString::Cint
+    aiMetadataEntry::Cint
+end
+
 struct aiScene
     mFlags::UInt32
-    mRootNode::Ptr{aiNode}
+    mRootNode::Ptr{Cvoid} # Ptr{aiNode}
     mNumMeshes::UInt32
     mMeshes::Ptr{Ptr{aiMesh}}
     mNumMaterials::UInt32
@@ -267,24 +394,22 @@ struct aiScene
     mLights::Ptr{Ptr{aiLight}}
     mNumCameras::UInt32
     mCameras::Ptr{Ptr{aiCamera}}
+    mMetaData::Ptr{aiMetadata}
     mPrivate::Cstring
 end
 
-struct aiMetadata
-    mNumProperties::UInt32
-    aiString::Cint
-    aiMetadataEntry::Cint
+const aiLogStreamCallback = Ptr{Cvoid}
+
+struct aiLogStream
+    callback::aiLogStreamCallback
+    user::Cstring
 end
 
-const aiFileOpenProc = Ptr{Cvoid}
-const aiFileCloseProc = Ptr{Cvoid}
-const aiUserData = Cstring
-
-struct aiFileIO
-    OpenProc::aiFileOpenProc
-    CloseProc::aiFileCloseProc
-    UserData::aiUserData
+struct aiPropertyStore
+    sentinel::UInt8
 end
+
+const aiBool = Cint
 
 struct aiExportFormatDesc
     id::Cstring
@@ -299,192 +424,31 @@ struct aiExportDataBlob
     next::Ptr{aiExportDataBlob}
 end
 
-const aiFileReadProc = Ptr{Cvoid}
-const aiFileWriteProc = Ptr{Cvoid}
-const aiFileTellProc = Ptr{Cvoid}
-const aiFileSeek = Ptr{Cvoid}
-const aiFileFlushProc = Ptr{Cvoid}
-
-struct aiFile
-    ReadProc::aiFileReadProc
-    WriteProc::aiFileWriteProc
-    TellProc::aiFileTellProc
-    FileSizeProc::aiFileTellProc
-    SeekProc::aiFileSeek
-    FlushProc::aiFileFlushProc
-    UserData::aiUserData
-end
-
-const AI_FALSE = 0
-const AI_TRUE = 1
-const aiLogStreamCallback = Ptr{Cvoid}
-
-struct aiLogStream
-    callback::aiLogStreamCallback
-    user::Cstring
-end
-
-struct aiPropertyStore
-    sentinel::UInt8
-end
-
-const aiBool = Cint
-const AI_CONFIG_GLOB_MEASURE_TIME = "GLOB_MEASURE_TIME"
-const AI_CONFIG_IMPORT_NO_SKELETON_MESHES = "IMPORT_NO_SKELETON_MESHES"
-const AI_CONFIG_PP_SBBC_MAX_BONES = "PP_SBBC_MAX_BONES"
-const AI_SBBC_DEFAULT_MAX_BONES = 60
-const AI_CONFIG_PP_CT_MAX_SMOOTHING_ANGLE = "PP_CT_MAX_SMOOTHING_ANGLE"
-const AI_CONFIG_PP_CT_TEXTURE_CHANNEL_INDEX = "PP_CT_TEXTURE_CHANNEL_INDEX"
-const AI_CONFIG_PP_GSN_MAX_SMOOTHING_ANGLE = "PP_GSN_MAX_SMOOTHING_ANGLE"
-const AI_CONFIG_IMPORT_MDL_COLORMAP = "IMPORT_MDL_COLORMAP"
-const AI_CONFIG_PP_RRM_EXCLUDE_LIST = "PP_RRM_EXCLUDE_LIST"
-const AI_CONFIG_PP_PTV_KEEP_HIERARCHY = "PP_PTV_KEEP_HIERARCHY"
-const AI_CONFIG_PP_PTV_NORMALIZE = "PP_PTV_NORMALIZE"
-const AI_CONFIG_PP_PTV_ADD_ROOT_TRANSFORMATION = "PP_PTV_ADD_ROOT_TRANSFORMATION"
-const AI_CONFIG_PP_PTV_ROOT_TRANSFORMATION = "PP_PTV_ROOT_TRANSFORMATION"
-const AI_CONFIG_PP_FD_REMOVE = "PP_FD_REMOVE"
-const AI_CONFIG_PP_FD_CHECKAREA = "PP_FD_CHECKAREA"
-const AI_CONFIG_PP_OG_EXCLUDE_LIST = "PP_OG_EXCLUDE_LIST"
-const AI_CONFIG_PP_SLM_TRIANGLE_LIMIT = "PP_SLM_TRIANGLE_LIMIT"
-const AI_SLM_DEFAULT_MAX_TRIANGLES = 1000000
-const AI_CONFIG_PP_SLM_VERTEX_LIMIT = "PP_SLM_VERTEX_LIMIT"
-const AI_SLM_DEFAULT_MAX_VERTICES = 1000000
-const AI_CONFIG_PP_LBW_MAX_WEIGHTS = "PP_LBW_MAX_WEIGHTS"
-const AI_LMW_MAX_WEIGHTS = 0x04
-const AI_CONFIG_PP_DB_THRESHOLD = "PP_DB_THRESHOLD"
-const AI_DEBONE_THRESHOLD = Float32(1.0)
-const AI_CONFIG_PP_DB_ALL_OR_NONE = "PP_DB_ALL_OR_NONE"
-const PP_ICL_PTCACHE_SIZE = 12
-const AI_CONFIG_PP_ICL_PTCACHE_SIZE = "PP_ICL_PTCACHE_SIZE"
-
-# Skipping MacroDefinition: aiComponent_COLORSn ( n ) ( 1u << ( n + 20u ) )
-# Skipping MacroDefinition: aiComponent_TEXCOORDSn ( n ) ( 1u << ( n + 25u ) )
-
-const AI_CONFIG_PP_RVC_FLAGS = "PP_RVC_FLAGS"
-const AI_CONFIG_PP_SBP_REMOVE = "PP_SBP_REMOVE"
-const AI_CONFIG_PP_FID_ANIM_ACCURACY = "PP_FID_ANIM_ACCURACY"
-const AI_UVTRAFO_SCALING = 0x01
-const AI_UVTRAFO_ROTATION = 0x02
-const AI_UVTRAFO_TRANSLATION = 0x04
-const AI_UVTRAFO_ALL = (AI_UVTRAFO_SCALING | AI_UVTRAFO_ROTATION) | AI_UVTRAFO_TRANSLATION
-const AI_CONFIG_PP_TUV_EVALUATE = "PP_TUV_EVALUATE"
-const AI_CONFIG_FAVOUR_SPEED = "FAVOUR_SPEED"
-const AI_CONFIG_IMPORT_FBX_READ_ALL_GEOMETRY_LAYERS = "IMPORT_FBX_READ_ALL_GEOMETRY_LAYERS"
-const AI_CONFIG_IMPORT_FBX_READ_ALL_MATERIALS = "IMPORT_FBX_READ_ALL_MATERIALS"
-const AI_CONFIG_IMPORT_FBX_READ_MATERIALS = "IMPORT_FBX_READ_MATERIALS"
-const AI_CONFIG_IMPORT_FBX_READ_TEXTURES = "IMPORT_FBX_READ_TEXTURES"
-const AI_CONFIG_IMPORT_FBX_READ_CAMERAS = "IMPORT_FBX_READ_CAMERAS"
-const AI_CONFIG_IMPORT_FBX_READ_LIGHTS = "IMPORT_FBX_READ_LIGHTS"
-const AI_CONFIG_IMPORT_FBX_READ_ANIMATIONS = "IMPORT_FBX_READ_ANIMATIONS"
-const AI_CONFIG_IMPORT_FBX_STRICT_MODE = "IMPORT_FBX_STRICT_MODE"
-const AI_CONFIG_IMPORT_FBX_PRESERVE_PIVOTS = "IMPORT_FBX_PRESERVE_PIVOTS"
-const AI_CONFIG_IMPORT_FBX_OPTIMIZE_EMPTY_ANIMATION_CURVES = "IMPORT_FBX_OPTIMIZE_EMPTY_ANIMATION_CURVES"
-const AI_CONFIG_IMPORT_FBX_SEARCH_EMBEDDED_TEXTURES = "IMPORT_FBX_SEARCH_EMBEDDED_TEXTURES"
-const AI_CONFIG_IMPORT_GLOBAL_KEYFRAME = "IMPORT_GLOBAL_KEYFRAME"
-const AI_CONFIG_IMPORT_MD3_KEYFRAME = "IMPORT_MD3_KEYFRAME"
-const AI_CONFIG_IMPORT_MD2_KEYFRAME = "IMPORT_MD2_KEYFRAME"
-const AI_CONFIG_IMPORT_MDL_KEYFRAME = "IMPORT_MDL_KEYFRAME"
-const AI_CONFIG_IMPORT_MDC_KEYFRAME = "IMPORT_MDC_KEYFRAME"
-const AI_CONFIG_IMPORT_SMD_KEYFRAME = "IMPORT_SMD_KEYFRAME"
-const AI_CONFIG_IMPORT_UNREAL_KEYFRAME = "IMPORT_UNREAL_KEYFRAME"
-const AI_CONFIG_IMPORT_AC_SEPARATE_BFCULL = "IMPORT_AC_SEPARATE_BFCULL"
-const AI_CONFIG_IMPORT_AC_EVAL_SUBDIVISION = "IMPORT_AC_EVAL_SUBDIVISION"
-const AI_CONFIG_IMPORT_UNREAL_HANDLE_FLAGS = "UNREAL_HANDLE_FLAGS"
-const AI_CONFIG_IMPORT_TER_MAKE_UVS = "IMPORT_TER_MAKE_UVS"
-const AI_CONFIG_IMPORT_ASE_RECONSTRUCT_NORMALS = "IMPORT_ASE_RECONSTRUCT_NORMALS"
-const AI_CONFIG_IMPORT_MD3_HANDLE_MULTIPART = "IMPORT_MD3_HANDLE_MULTIPART"
-const AI_CONFIG_IMPORT_MD3_SKIN_NAME = "IMPORT_MD3_SKIN_NAME"
-const AI_CONFIG_IMPORT_MD3_SHADER_SRC = "IMPORT_MD3_SHADER_SRC"
-const AI_CONFIG_IMPORT_LWO_ONE_LAYER_ONLY = "IMPORT_LWO_ONE_LAYER_ONLY"
-const AI_CONFIG_IMPORT_MD5_NO_ANIM_AUTOLOAD = "IMPORT_MD5_NO_ANIM_AUTOLOAD"
-const AI_CONFIG_IMPORT_LWS_ANIM_START = "IMPORT_LWS_ANIM_START"
-const AI_CONFIG_IMPORT_LWS_ANIM_END = "IMPORT_LWS_ANIM_END"
-const AI_CONFIG_IMPORT_IRR_ANIM_FPS = "IMPORT_IRR_ANIM_FPS"
-const AI_CONFIG_IMPORT_OGRE_MATERIAL_FILE = "IMPORT_OGRE_MATERIAL_FILE"
-const AI_CONFIG_IMPORT_OGRE_TEXTURETYPE_FROM_FILENAME = "IMPORT_OGRE_TEXTURETYPE_FROM_FILENAME"
-const AI_CONFIG_ANDROID_JNI_ASSIMP_MANAGER_SUPPORT = "AI_CONFIG_ANDROID_JNI_ASSIMP_MANAGER_SUPPORT"
-const AI_CONFIG_IMPORT_IFC_SKIP_SPACE_REPRESENTATIONS = "IMPORT_IFC_SKIP_SPACE_REPRESENTATIONS"
-const AI_CONFIG_IMPORT_IFC_CUSTOM_TRIANGULATION = "IMPORT_IFC_CUSTOM_TRIANGULATION"
-const AI_CONFIG_IMPORT_IFC_SMOOTHING_ANGLE = "IMPORT_IFC_SMOOTHING_ANGLE"
-const AI_IMPORT_IFC_DEFAULT_SMOOTHING_ANGLE = Float32(10.0)
-const AI_CONFIG_IMPORT_IFC_CYLINDRICAL_TESSELLATION = "IMPORT_IFC_CYLINDRICAL_TESSELLATION"
-const AI_IMPORT_IFC_DEFAULT_CYLINDRICAL_TESSELLATION = 32
-const AI_CONFIG_IMPORT_COLLADA_IGNORE_UP_DIRECTION = "IMPORT_COLLADA_IGNORE_UP_DIRECTION"
-const AI_CONFIG_EXPORT_XFILE_64BIT = "EXPORT_XFILE_64BIT"
-const AI_CONFIG_GLOBAL_SCALE_FACTOR_KEY = "GLOBAL_SCALE_FACTOR"
-const AI_CONFIG_GLOBAL_SCALE_FACTOR_DEFAULT = Float32(1.0)
-
-@cenum(aiComponent,
-    aiComponent_NORMALS = 2,
-    aiComponent_TANGENTS_AND_BITANGENTS = 4,
-    aiComponent_COLORS = 8,
-    aiComponent_TEXCOORDS = 16,
-    aiComponent_BONEWEIGHTS = 32,
-    aiComponent_ANIMATIONS = 64,
-    aiComponent_TEXTURES = 128,
-    aiComponent_LIGHTS = 256,
-    aiComponent_CAMERAS = 512,
-    aiComponent_MESHES = 1024,
-    aiComponent_MATERIALS = 2048,
-    _aiComponent_Force32Bit = 2684354559,
-)
-
-# Skipping MacroDefinition: ASSIMP_API __attribute__ ( ( visibility ( "default" ) ) )
-# Skipping MacroDefinition: AI_WONT_RETURN_SUFFIX __attribute__ ( ( noreturn ) )
-
-const AI_MATH_PI = 3.141592653589793
-const AI_MATH_TWO_PI = AI_MATH_PI * 2.0
-const AI_MATH_HALF_PI = AI_MATH_PI * 0.5
-const AI_MATH_PI_F = Float32(3.1415926538)
-const AI_MATH_TWO_PI_F = AI_MATH_PI_F * Float32(2.0)
-const AI_MATH_HALF_PI_F = AI_MATH_PI_F * Float32(0.5)
-
-# Skipping MacroDefinition: AI_DEG_TO_RAD ( x ) ( ( x ) * ( ai_real ) 0.0174532925 )
-# Skipping MacroDefinition: AI_RAD_TO_DEG ( x ) ( ( x ) * ( ai_real ) 57.2957795 )
-# Skipping MacroDefinition: AI_MAX_ALLOC ( type ) ( ( 256U * 1024 * 1024 ) / sizeof ( type ) )
-
-const ai_int = Cint
-const ai_uint = UInt32
-
-@cenum(aiImporterFlags,
-    aiImporterFlags_SupportTextFlavour = 1,
-    aiImporterFlags_SupportBinaryFlavour = 2,
-    aiImporterFlags_SupportCompressedFlavour = 4,
-    aiImporterFlags_LimitedSupport = 8,
-    aiImporterFlags_Experimental = 16,
-)
-
-struct aiImporterDesc
-    mName::Cstring
-    mAuthor::Cstring
-    mMaintainer::Cstring
-    mComments::Cstring
-    mFlags::UInt32
-    mMinMajor::UInt32
-    mMinMinor::UInt32
-    mMaxMajor::UInt32
-    mMaxMinor::UInt32
-    mFileExtensions::Cstring
-end
-
 const AI_DEFAULT_MATERIAL_NAME = "DefaultMaterial"
 
-@cenum(aiTextureType,
-    aiTextureType_NONE = 0,
-    aiTextureType_DIFFUSE = 1,
-    aiTextureType_SPECULAR = 2,
-    aiTextureType_AMBIENT = 3,
-    aiTextureType_EMISSIVE = 4,
-    aiTextureType_HEIGHT = 5,
-    aiTextureType_NORMALS = 6,
-    aiTextureType_SHININESS = 7,
-    aiTextureType_OPACITY = 8,
-    aiTextureType_DISPLACEMENT = 9,
-    aiTextureType_LIGHTMAP = 10,
-    aiTextureType_REFLECTION = 11,
-    aiTextureType_UNKNOWN = 12,
-    _aiTextureType_Force32Bit = 2147483647,
-)
+@cenum aiTextureType::UInt32 begin
+    aiTextureType_NONE = 0
+    aiTextureType_DIFFUSE = 1
+    aiTextureType_SPECULAR = 2
+    aiTextureType_AMBIENT = 3
+    aiTextureType_EMISSIVE = 4
+    aiTextureType_HEIGHT = 5
+    aiTextureType_NORMALS = 6
+    aiTextureType_SHININESS = 7
+    aiTextureType_OPACITY = 8
+    aiTextureType_DISPLACEMENT = 9
+    aiTextureType_LIGHTMAP = 10
+    aiTextureType_REFLECTION = 11
+    aiTextureType_BASE_COLOR = 12
+    aiTextureType_NORMAL_CAMERA = 13
+    aiTextureType_EMISSION_COLOR = 14
+    aiTextureType_METALNESS = 15
+    aiTextureType_DIFFUSE_ROUGHNESS = 16
+    aiTextureType_AMBIENT_OCCLUSION = 17
+    aiTextureType_UNKNOWN = 18
+    _aiTextureType_Force32Bit = 2147483647
+end
+
 
 const AI_TEXTURE_TYPE_MAX = aiTextureType_UNKNOWN
 
@@ -494,6 +458,7 @@ const AI_TEXTURE_TYPE_MAX = aiTextureType_UNKNOWN
 # Skipping MacroDefinition: AI_MATKEY_ENABLE_WIREFRAME "$mat.wireframe" , 0 , 0
 # Skipping MacroDefinition: AI_MATKEY_BLEND_FUNC "$mat.blend" , 0 , 0
 # Skipping MacroDefinition: AI_MATKEY_OPACITY "$mat.opacity" , 0 , 0
+# Skipping MacroDefinition: AI_MATKEY_TRANSPARENCYFACTOR "$mat.transparencyfactor" , 0 , 0
 # Skipping MacroDefinition: AI_MATKEY_BUMPSCALING "$mat.bumpscaling" , 0 , 0
 # Skipping MacroDefinition: AI_MATKEY_SHININESS "$mat.shininess" , 0 , 0
 # Skipping MacroDefinition: AI_MATKEY_REFLECTIVITY "$mat.reflectivity" , 0 , 0
@@ -506,6 +471,13 @@ const AI_TEXTURE_TYPE_MAX = aiTextureType_UNKNOWN
 # Skipping MacroDefinition: AI_MATKEY_COLOR_TRANSPARENT "$clr.transparent" , 0 , 0
 # Skipping MacroDefinition: AI_MATKEY_COLOR_REFLECTIVE "$clr.reflective" , 0 , 0
 # Skipping MacroDefinition: AI_MATKEY_GLOBAL_BACKGROUND_IMAGE "?bg.global" , 0 , 0
+# Skipping MacroDefinition: AI_MATKEY_GLOBAL_SHADERLANG "?sh.lang" , 0 , 0
+# Skipping MacroDefinition: AI_MATKEY_SHADER_VERTEX "?sh.vs" , 0 , 0
+# Skipping MacroDefinition: AI_MATKEY_SHADER_FRAGMENT "?sh.fs" , 0 , 0
+# Skipping MacroDefinition: AI_MATKEY_SHADER_GEO "?sh.gs" , 0 , 0
+# Skipping MacroDefinition: AI_MATKEY_SHADER_TESSELATION "?sh.ts" , 0 , 0
+# Skipping MacroDefinition: AI_MATKEY_SHADER_PRIMITIVE "?sh.ps" , 0 , 0
+# Skipping MacroDefinition: AI_MATKEY_SHADER_COMPUTE "?sh.cs" , 0 , 0
 # Skipping MacroDefinition: AI_MATKEY_TEXTURE ( type , N ) _AI_MATKEY_TEXTURE_BASE , type , N
 # Skipping MacroDefinition: AI_MATKEY_TEXTURE_DIFFUSE ( N ) AI_MATKEY_TEXTURE ( aiTextureType_DIFFUSE , N )
 # Skipping MacroDefinition: AI_MATKEY_TEXTURE_SPECULAR ( N ) AI_MATKEY_TEXTURE ( aiTextureType_SPECULAR , N )
@@ -631,140 +603,68 @@ const AI_TEXTURE_TYPE_MAX = aiTextureType_UNKNOWN
 # Skipping MacroDefinition: aiGetMaterialFloat ( pMat , type , index , pKey , pOut ) aiGetMaterialFloatArray ( pMat , type , index , pKey , pOut , NULL )
 # Skipping MacroDefinition: aiGetMaterialInteger ( pMat , type , index , pKey , pOut ) aiGetMaterialIntegerArray ( pMat , type , index , pKey , pOut , NULL )
 
-@cenum(aiTextureOp,
-    aiTextureOp_Multiply = 0,
-    aiTextureOp_Add = 1,
-    aiTextureOp_Subtract = 2,
-    aiTextureOp_Divide = 3,
-    aiTextureOp_SmoothAdd = 4,
-    aiTextureOp_SignedAdd = 5,
-    _aiTextureOp_Force32Bit = 2147483647,
-)
-@cenum(aiTextureMapMode,
-    aiTextureMapMode_Wrap = 0,
-    aiTextureMapMode_Clamp = 1,
-    aiTextureMapMode_Decal = 3,
-    aiTextureMapMode_Mirror = 2,
-    _aiTextureMapMode_Force32Bit = 2147483647,
-)
-@cenum(aiTextureMapping,
-    aiTextureMapping_UV = 0,
-    aiTextureMapping_SPHERE = 1,
-    aiTextureMapping_CYLINDER = 2,
-    aiTextureMapping_BOX = 3,
-    aiTextureMapping_PLANE = 4,
-    aiTextureMapping_OTHER = 5,
-    _aiTextureMapping_Force32Bit = 2147483647,
-)
-@cenum(aiShadingMode,
-    aiShadingMode_Flat = 1,
-    aiShadingMode_Gouraud = 2,
-    aiShadingMode_Phong = 3,
-    aiShadingMode_Blinn = 4,
-    aiShadingMode_Toon = 5,
-    aiShadingMode_OrenNayar = 6,
-    aiShadingMode_Minnaert = 7,
-    aiShadingMode_CookTorrance = 8,
-    aiShadingMode_NoShading = 9,
-    aiShadingMode_Fresnel = 10,
-    _aiShadingMode_Force32Bit = 2147483647,
-)
-@cenum(aiTextureFlags,
-    aiTextureFlags_Invert = 1,
-    aiTextureFlags_UseAlpha = 2,
-    aiTextureFlags_IgnoreAlpha = 4,
-    _aiTextureFlags_Force32Bit = 2147483647,
-)
-@cenum(aiBlendMode,
-    aiBlendMode_Default = 0,
-    aiBlendMode_Additive = 1,
-    _aiBlendMode_Force32Bit = 2147483647,
-)
-
-struct aiMatrix3x3
-    a1::ai_real
-    a2::ai_real
-    a3::ai_real
-    b1::ai_real
-    b2::ai_real
-    b3::ai_real
-    c1::ai_real
-    c2::ai_real
-    c3::ai_real
+@cenum aiTextureOp::UInt32 begin
+    aiTextureOp_Multiply = 0
+    aiTextureOp_Add = 1
+    aiTextureOp_Subtract = 2
+    aiTextureOp_Divide = 3
+    aiTextureOp_SmoothAdd = 4
+    aiTextureOp_SignedAdd = 5
+    _aiTextureOp_Force32Bit = 2147483647
 end
 
-const AI_MAX_FACE_INDICES = Float32(0x07ff)
-const AI_MAX_BONE_WEIGHTS = Float32(0x07ffffff)
-const AI_MAX_VERTICES = Float32(0x07ffffff)
-const AI_MAX_FACES = Float32(0x07ffffff)
-const AI_MAX_NUMBER_OF_COLOR_SETS = 0x08
-const AI_MAX_NUMBER_OF_TEXTURECOORDS = 0x08
-
-# Skipping MacroDefinition: AI_PRIMITIVE_TYPE_FOR_N_INDICES ( n ) ( ( n ) > 3 ? aiPrimitiveType_POLYGON : ( aiPrimitiveType ) ( 1u << ( ( n ) - 1 ) ) )
-
-@cenum(aiPrimitiveType,
-    aiPrimitiveType_POINT = 1,
-    aiPrimitiveType_LINE = 2,
-    aiPrimitiveType_TRIANGLE = 4,
-    aiPrimitiveType_POLYGON = 8,
-    _aiPrimitiveType_Force32Bit = 2147483647,
-)
-@cenum(aiMorphingMethod,
-    aiMorphingMethod_VERTEX_BLEND = 1,
-    aiMorphingMethod_MORPH_NORMALIZED = 2,
-    aiMorphingMethod_MORPH_RELATIVE = 3,
-    _aiMorphingMethod_Force32Bit = 2147483647,
-)
-@cenum(aiMetadataType,
-    AI_BOOL = 0,
-    AI_INT32 = 1,
-    AI_UINT64 = 2,
-    AI_FLOAT = 3,
-    AI_DOUBLE = 4,
-    AI_AISTRING = 5,
-    AI_AIVECTOR3D = 6,
-    FORCE_32BIT = 7,
-)
-
-struct aiMetadataEntry
-    mType::aiMetadataType
-    mData::Ptr{Cvoid}
+@cenum aiTextureMapMode::UInt32 begin
+    aiTextureMapMode_Wrap = 0
+    aiTextureMapMode_Clamp = 1
+    aiTextureMapMode_Decal = 3
+    aiTextureMapMode_Mirror = 2
+    _aiTextureMapMode_Force32Bit = 2147483647
 end
 
-@cenum(aiPostProcessSteps,
-    aiProcess_CalcTangentSpace = 1,
-    aiProcess_JoinIdenticalVertices = 2,
-    aiProcess_MakeLeftHanded = 4,
-    aiProcess_Triangulate = 8,
-    aiProcess_RemoveComponent = 16,
-    aiProcess_GenNormals = 32,
-    aiProcess_GenSmoothNormals = 64,
-    aiProcess_SplitLargeMeshes = 128,
-    aiProcess_PreTransformVertices = 256,
-    aiProcess_LimitBoneWeights = 512,
-    aiProcess_ValidateDataStructure = 1024,
-    aiProcess_ImproveCacheLocality = 2048,
-    aiProcess_RemoveRedundantMaterials = 4096,
-    aiProcess_FixInfacingNormals = 8192,
-    aiProcess_SortByPType = 32768,
-    aiProcess_FindDegenerates = 65536,
-    aiProcess_FindInvalidData = 131072,
-    aiProcess_GenUVCoords = 262144,
-    aiProcess_TransformUVCoords = 524288,
-    aiProcess_FindInstances = 1048576,
-    aiProcess_OptimizeMeshes = 2097152,
-    aiProcess_OptimizeGraph = 4194304,
-    aiProcess_FlipUVs = 8388608,
-    aiProcess_FlipWindingOrder = 16777216,
-    aiProcess_SplitByBoneCount = 33554432,
-    aiProcess_Debone = 67108864,
-    aiProcess_GlobalScale = 134217728,
-)
+@cenum aiTextureMapping::UInt32 begin
+    aiTextureMapping_UV = 0
+    aiTextureMapping_SPHERE = 1
+    aiTextureMapping_CYLINDER = 2
+    aiTextureMapping_BOX = 3
+    aiTextureMapping_PLANE = 4
+    aiTextureMapping_OTHER = 5
+    _aiTextureMapping_Force32Bit = 2147483647
+end
 
-const aiProcess_ConvertToLeftHanded = ((aiProcess_MakeLeftHanded | aiProcess_FlipUVs) | aiProcess_FlipWindingOrder) | UInt32(0)
-const aiProcessPreset_TargetRealtime_Fast = (((((aiProcess_CalcTangentSpace | aiProcess_GenNormals) | aiProcess_JoinIdenticalVertices) | aiProcess_Triangulate) | aiProcess_GenUVCoords) | aiProcess_SortByPType) | UInt32(0)
-const aiProcessPreset_TargetRealtime_Quality = (((((((((((aiProcess_CalcTangentSpace | aiProcess_GenSmoothNormals) | aiProcess_JoinIdenticalVertices) | aiProcess_ImproveCacheLocality) | aiProcess_LimitBoneWeights) | aiProcess_RemoveRedundantMaterials) | aiProcess_SplitLargeMeshes) | aiProcess_Triangulate) | aiProcess_GenUVCoords) | aiProcess_SortByPType) | aiProcess_FindDegenerates) | aiProcess_FindInvalidData) | UInt32(0)
-const aiProcessPreset_TargetRealtime_MaxQuality = (((aiProcessPreset_TargetRealtime_Quality | aiProcess_FindInstances) | aiProcess_ValidateDataStructure) | aiProcess_OptimizeMeshes) | UInt32(0)
+@cenum aiShadingMode::UInt32 begin
+    aiShadingMode_Flat = 1
+    aiShadingMode_Gouraud = 2
+    aiShadingMode_Phong = 3
+    aiShadingMode_Blinn = 4
+    aiShadingMode_Toon = 5
+    aiShadingMode_OrenNayar = 6
+    aiShadingMode_Minnaert = 7
+    aiShadingMode_CookTorrance = 8
+    aiShadingMode_NoShading = 9
+    aiShadingMode_Fresnel = 10
+    _aiShadingMode_Force32Bit = 2147483647
+end
+
+@cenum aiTextureFlags::UInt32 begin
+    aiTextureFlags_Invert = 1
+    aiTextureFlags_UseAlpha = 2
+    aiTextureFlags_IgnoreAlpha = 4
+    _aiTextureFlags_Force32Bit = 2147483647
+end
+
+@cenum aiBlendMode::UInt32 begin
+    aiBlendMode_Default = 0
+    aiBlendMode_Additive = 1
+    _aiBlendMode_Force32Bit = 2147483647
+end
+
+
+struct aiUVTransform
+    mTranslation::aiVector2D
+    mScaling::aiVector2D
+    mRotation::ai_real
+end
+
 const AI_SCENE_FLAGS_INCOMPLETE = 0x01
 const AI_SCENE_FLAGS_VALIDATED = 0x02
 const AI_SCENE_FLAGS_VALIDATION_WARNING = 0x04
@@ -775,60 +675,66 @@ const AI_EMBEDDED_TEXNAME_PREFIX = "*"
 
 # Skipping MacroDefinition: AI_MAKE_EMBEDDED_TEXNAME ( _n_ ) AI_EMBEDDED_TEXNAME_PREFIX # _n_
 
-const MAXLEN = 1024
+const HINTMAXTEXTURELEN = 9
 
-@cenum(aiReturn{Int32},
-    aiReturn_SUCCESS = 0,
-    aiReturn_FAILURE = -1,
-    aiReturn_OUTOFMEMORY = -3,
-    _AI_ENFORCE_ENUM_SIZE = 2147483647,
-)
+# Skipping MacroDefinition: AI_MATKEY_GLTF_PBRMETALLICROUGHNESS_BASE_COLOR_FACTOR "$mat.gltf.pbrMetallicRoughness.baseColorFactor" , 0 , 0
+# Skipping MacroDefinition: AI_MATKEY_GLTF_PBRMETALLICROUGHNESS_METALLIC_FACTOR "$mat.gltf.pbrMetallicRoughness.metallicFactor" , 0 , 0
+# Skipping MacroDefinition: AI_MATKEY_GLTF_PBRMETALLICROUGHNESS_ROUGHNESS_FACTOR "$mat.gltf.pbrMetallicRoughness.roughnessFactor" , 0 , 0
+# Skipping MacroDefinition: AI_MATKEY_GLTF_PBRMETALLICROUGHNESS_BASE_COLOR_TEXTURE aiTextureType_DIFFUSE , 1
+# Skipping MacroDefinition: AI_MATKEY_GLTF_PBRMETALLICROUGHNESS_METALLICROUGHNESS_TEXTURE aiTextureType_UNKNOWN , 0
+# Skipping MacroDefinition: AI_MATKEY_GLTF_ALPHAMODE "$mat.gltf.alphaMode" , 0 , 0
+# Skipping MacroDefinition: AI_MATKEY_GLTF_ALPHACUTOFF "$mat.gltf.alphaCutoff" , 0 , 0
+# Skipping MacroDefinition: AI_MATKEY_GLTF_PBRSPECULARGLOSSINESS "$mat.gltf.pbrSpecularGlossiness" , 0 , 0
+# Skipping MacroDefinition: AI_MATKEY_GLTF_PBRSPECULARGLOSSINESS_GLOSSINESS_FACTOR "$mat.gltf.pbrMetallicRoughness.glossinessFactor" , 0 , 0
+# Skipping MacroDefinition: AI_MATKEY_GLTF_UNLIT "$mat.gltf.unlit" , 0 , 0
+# Skipping MacroDefinition: AI_MATKEY_GLTF_TEXTURE_TEXCOORD ( type , N ) _AI_MATKEY_GLTF_TEXTURE_TEXCOORD_BASE , type , N
+# Skipping MacroDefinition: AI_MATKEY_GLTF_MAPPINGNAME ( type , N ) _AI_MATKEY_GLTF_MAPPINGNAME_BASE , type , N
+# Skipping MacroDefinition: AI_MATKEY_GLTF_MAPPINGID ( type , N ) _AI_MATKEY_GLTF_MAPPINGID_BASE , type , N
+# Skipping MacroDefinition: AI_MATKEY_GLTF_MAPPINGFILTER_MAG ( type , N ) _AI_MATKEY_GLTF_MAPPINGFILTER_MAG_BASE , type , N
+# Skipping MacroDefinition: AI_MATKEY_GLTF_MAPPINGFILTER_MIN ( type , N ) _AI_MATKEY_GLTF_MAPPINGFILTER_MIN_BASE , type , N
+# Skipping MacroDefinition: AI_MATKEY_GLTF_TEXTURE_SCALE ( type , N ) _AI_MATKEY_GLTF_SCALE_BASE , type , N
+# Skipping MacroDefinition: AI_MATKEY_GLTF_TEXTURE_STRENGTH ( type , N ) _AI_MATKEY_GLTF_STRENGTH_BASE , type , N
 
-const AI_SUCCESS = aiReturn_SUCCESS
-const AI_FAILURE = aiReturn_FAILURE
-const AI_OUTOFMEMORY = aiReturn_OUTOFMEMORY
+const AI_MAX_FACE_INDICES = Float32(0x07ff)
+const AI_MAX_BONE_WEIGHTS = Float32(0x07ffffff)
+const AI_MAX_VERTICES = Float32(0x07ffffff)
+const AI_MAX_FACES = Float32(0x07ffffff)
+const AI_MAX_NUMBER_OF_COLOR_SETS = 0x08
+const AI_MAX_NUMBER_OF_TEXTURECOORDS = 0x08
 
-@cenum(aiDefaultLogStream,
-    aiDefaultLogStream_FILE = 1,
-    aiDefaultLogStream_STDOUT = 2,
-    aiDefaultLogStream_STDERR = 4,
-    aiDefaultLogStream_DEBUGGER = 8,
-    _AI_DLS_ENFORCE_ENUM_SIZE = 2147483647,
-)
+# Skipping MacroDefinition: AI_PRIMITIVE_TYPE_FOR_N_INDICES ( n ) ( ( n ) > 3 ? aiPrimitiveType_POLYGON : ( aiPrimitiveType ) ( 1u << ( ( n ) - 1 ) ) )
 
-const DLS_FILE = aiDefaultLogStream_FILE
-const DLS_STDOUT = aiDefaultLogStream_STDOUT
-const DLS_STDERR = aiDefaultLogStream_STDERR
-const DLS_DEBUGGER = aiDefaultLogStream_DEBUGGER
-
-struct aiPlane
-    a::ai_real
-    b::ai_real
-    c::ai_real
-    d::ai_real
+@cenum aiPrimitiveType::UInt32 begin
+    aiPrimitiveType_POINT = 1
+    aiPrimitiveType_LINE = 2
+    aiPrimitiveType_TRIANGLE = 4
+    aiPrimitiveType_POLYGON = 8
+    _aiPrimitiveType_Force32Bit = 2147483647
 end
 
-struct aiRay
-    pos::aiVector3D
-    dir::aiVector3D
+@cenum aiMorphingMethod::UInt32 begin
+    aiMorphingMethod_VERTEX_BLEND = 1
+    aiMorphingMethod_MORPH_NORMALIZED = 2
+    aiMorphingMethod_MORPH_RELATIVE = 3
+    _aiMorphingMethod_Force32Bit = 2147483647
 end
 
-@cenum(aiOrigin,
-    aiOrigin_SET = 0,
-    aiOrigin_CUR = 1,
-    aiOrigin_END = 2,
-    _AI_ORIGIN_ENFORCE_ENUM_SIZE = 2147483647,
-)
+@cenum aiMetadataType::UInt32 begin
+    AI_BOOL = 0
+    AI_INT32 = 1
+    AI_UINT64 = 2
+    AI_FLOAT = 3
+    AI_DOUBLE = 4
+    AI_AISTRING = 5
+    AI_AIVECTOR3D = 6
+    AI_META_MAX = 7
+    FORCE_32BIT = 8
+end
 
-struct aiMemoryInfo
-    textures::UInt32
-    materials::UInt32
-    meshes::UInt32
-    nodes::UInt32
-    animations::UInt32
-    cameras::UInt32
-    lights::UInt32
-    total::UInt32
+
+struct aiMetadataEntry
+    mType::aiMetadataType
+    mData::Ptr{Cvoid}
 end
 
 const ASSIMP_CFLAGS_SHARED = 0x01
@@ -836,29 +742,3 @@ const ASSIMP_CFLAGS_STLPORT = 0x02
 const ASSIMP_CFLAGS_DEBUG = 0x04
 const ASSIMP_CFLAGS_NOBOOST = 0x08
 const ASSIMP_CFLAGS_SINGLETHREADED = 0x10
-const PRINTF_INT64_MODIFIER = "ll"
-const PRINTF_INT32_MODIFIER = ""
-const PRINTF_INT16_MODIFIER = "h"
-const PRINTF_INTMAX_MODIFIER = PRINTF_INT64_MODIFIER
-const PRINTF_INT64_HEX_WIDTH = "16"
-const PRINTF_UINT64_HEX_WIDTH = "16"
-const PRINTF_INT32_HEX_WIDTH = "8"
-const PRINTF_UINT32_HEX_WIDTH = "8"
-const PRINTF_INT16_HEX_WIDTH = "4"
-const PRINTF_UINT16_HEX_WIDTH = "4"
-const PRINTF_INT8_HEX_WIDTH = "2"
-const PRINTF_UINT8_HEX_WIDTH = "2"
-const PRINTF_INT64_DEC_WIDTH = "19"
-const PRINTF_UINT64_DEC_WIDTH = "20"
-const PRINTF_INT32_DEC_WIDTH = "10"
-const PRINTF_UINT32_DEC_WIDTH = "10"
-const PRINTF_INT16_DEC_WIDTH = "5"
-const PRINTF_UINT16_DEC_WIDTH = "5"
-const PRINTF_INT8_DEC_WIDTH = "3"
-const PRINTF_UINT8_DEC_WIDTH = "3"
-const PRINTF_INTMAX_HEX_WIDTH = PRINTF_UINT64_HEX_WIDTH
-const PRINTF_UINTMAX_HEX_WIDTH = PRINTF_UINT64_HEX_WIDTH
-const PRINTF_INTMAX_DEC_WIDTH = PRINTF_UINT64_DEC_WIDTH
-const PRINTF_UINTMAX_DEC_WIDTH = PRINTF_UINT64_DEC_WIDTH
-
-# Skipping MacroDefinition: PACK_STRUCT __attribute__ ( ( __packed__ ) )
