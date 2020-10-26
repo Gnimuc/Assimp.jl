@@ -5,7 +5,7 @@ using assimp_jll
 const ASSIMP_INCLUDE = joinpath(dirname(assimp_jll.libassimp_path), "..", "include") |> normpath
 const C_INTERFACE_HEADERS = ["defs.h", "vector2.h", "vector3.h", "matrix3x3.h", "matrix4x4.h", "color4.h", "types.h", "aabb.h",
                              "cfileio.h", "cimport.h", "importerdesc.h", "cexport.h", "material.h", "scene.h", "texture.h", "quaternion.h",
-                             "pbrmaterial.h", "mesh.h", "light.h", "anim.h", "camera.h", "metadata.h", "version.h"]
+                             "pbrmaterial.h", "mesh.h", "light.h", "anim.h", "camera.h", "metadata.h", "postprocess.h", "version.h"]
 const ASSIMP_HEADERS = [joinpath(ASSIMP_INCLUDE, "assimp", h) for h in C_INTERFACE_HEADERS]
 
 # create a work context

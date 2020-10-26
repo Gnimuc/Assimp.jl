@@ -268,6 +268,9 @@ end
 # Julia wrapper for header: metadata.h
 # Automatically generated using Clang.jl
 
+# Julia wrapper for header: postprocess.h
+# Automatically generated using Clang.jl
+
 # Julia wrapper for header: version.h
 # Automatically generated using Clang.jl
 
