@@ -30,27 +30,27 @@
 
 
 function aiImportFile(pFile, pFlags)
-    ccall((:aiImportFile, libassimp), Ptr{aiScene}, (Cstring, UInt32), pFile, pFlags)
+    ccall((:aiImportFile, libassimp), Ptr{aiScene}, (Cstring, Cuint), pFile, pFlags)
 end
 
 function aiImportFileEx(pFile, pFlags, pFS)
-    ccall((:aiImportFileEx, libassimp), Ptr{aiScene}, (Cstring, UInt32, Ptr{aiFileIO}), pFile, pFlags, pFS)
+    ccall((:aiImportFileEx, libassimp), Ptr{aiScene}, (Cstring, Cuint, Ptr{aiFileIO}), pFile, pFlags, pFS)
 end
 
 function aiImportFileExWithProperties(pFile, pFlags, pFS, pProps)
-    ccall((:aiImportFileExWithProperties, libassimp), Ptr{aiScene}, (Cstring, UInt32, Ptr{aiFileIO}, Ptr{aiPropertyStore}), pFile, pFlags, pFS, pProps)
+    ccall((:aiImportFileExWithProperties, libassimp), Ptr{aiScene}, (Cstring, Cuint, Ptr{aiFileIO}, Ptr{aiPropertyStore}), pFile, pFlags, pFS, pProps)
 end
 
 function aiImportFileFromMemory(pBuffer, pLength, pFlags, pHint)
-    ccall((:aiImportFileFromMemory, libassimp), Ptr{aiScene}, (Cstring, UInt32, UInt32, Cstring), pBuffer, pLength, pFlags, pHint)
+    ccall((:aiImportFileFromMemory, libassimp), Ptr{aiScene}, (Cstring, Cuint, Cuint, Cstring), pBuffer, pLength, pFlags, pHint)
 end
 
 function aiImportFileFromMemoryWithProperties(pBuffer, pLength, pFlags, pHint, pProps)
-    ccall((:aiImportFileFromMemoryWithProperties, libassimp), Ptr{aiScene}, (Cstring, UInt32, UInt32, Cstring, Ptr{aiPropertyStore}), pBuffer, pLength, pFlags, pHint, pProps)
+    ccall((:aiImportFileFromMemoryWithProperties, libassimp), Ptr{aiScene}, (Cstring, Cuint, Cuint, Cstring, Ptr{aiPropertyStore}), pBuffer, pLength, pFlags, pHint, pProps)
 end
 
 function aiApplyPostProcessing(pScene, pFlags)
-    ccall((:aiApplyPostProcessing, libassimp), Ptr{aiScene}, (Ptr{aiScene}, UInt32), pScene, pFlags)
+    ccall((:aiApplyPostProcessing, libassimp), Ptr{aiScene}, (Ptr{aiScene}, Cuint), pScene, pFlags)
 end
 
 function aiGetPredefinedLogStream(pStreams, file)
@@ -192,15 +192,15 @@ function aiFreeScene(pIn)
 end
 
 function aiExportScene(pScene, pFormatId, pFileName, pPreprocessing)
-    ccall((:aiExportScene, libassimp), aiReturn, (Ptr{aiScene}, Cstring, Cstring, UInt32), pScene, pFormatId, pFileName, pPreprocessing)
+    ccall((:aiExportScene, libassimp), aiReturn, (Ptr{aiScene}, Cstring, Cstring, Cuint), pScene, pFormatId, pFileName, pPreprocessing)
 end
 
 function aiExportSceneEx(pScene, pFormatId, pFileName, pIO, pPreprocessing)
-    ccall((:aiExportSceneEx, libassimp), aiReturn, (Ptr{aiScene}, Cstring, Cstring, Ptr{aiFileIO}, UInt32), pScene, pFormatId, pFileName, pIO, pPreprocessing)
+    ccall((:aiExportSceneEx, libassimp), aiReturn, (Ptr{aiScene}, Cstring, Cstring, Ptr{aiFileIO}, Cuint), pScene, pFormatId, pFileName, pIO, pPreprocessing)
 end
 
 function aiExportSceneToBlob(pScene, pFormatId, pPreprocessing)
-    ccall((:aiExportSceneToBlob, libassimp), Ptr{aiExportDataBlob}, (Ptr{aiScene}, Cstring, UInt32), pScene, pFormatId, pPreprocessing)
+    ccall((:aiExportSceneToBlob, libassimp), Ptr{aiExportDataBlob}, (Ptr{aiScene}, Cstring, Cuint), pScene, pFormatId, pPreprocessing)
 end
 
 function aiReleaseExportBlob(pData)
@@ -211,35 +211,35 @@ end
 
 
 function aiGetMaterialProperty(pMat, pKey, type, index, pPropOut)
-    ccall((:aiGetMaterialProperty, libassimp), aiReturn, (Ptr{aiMaterial}, Cstring, UInt32, UInt32, Ptr{Ptr{aiMaterialProperty}}), pMat, pKey, type, index, pPropOut)
+    ccall((:aiGetMaterialProperty, libassimp), aiReturn, (Ptr{aiMaterial}, Cstring, Cuint, Cuint, Ptr{Ptr{aiMaterialProperty}}), pMat, pKey, type, index, pPropOut)
 end
 
 function aiGetMaterialFloatArray(pMat, pKey, type, index, pOut, pMax)
-    ccall((:aiGetMaterialFloatArray, libassimp), aiReturn, (Ptr{aiMaterial}, Cstring, UInt32, UInt32, Ptr{ai_real}, Ptr{UInt32}), pMat, pKey, type, index, pOut, pMax)
+    ccall((:aiGetMaterialFloatArray, libassimp), aiReturn, (Ptr{aiMaterial}, Cstring, Cuint, Cuint, Ptr{ai_real}, Ptr{Cuint}), pMat, pKey, type, index, pOut, pMax)
 end
 
 function aiGetMaterialIntegerArray(pMat, pKey, type, index, pOut, pMax)
-    ccall((:aiGetMaterialIntegerArray, libassimp), aiReturn, (Ptr{aiMaterial}, Cstring, UInt32, UInt32, Ptr{Cint}, Ptr{UInt32}), pMat, pKey, type, index, pOut, pMax)
+    ccall((:aiGetMaterialIntegerArray, libassimp), aiReturn, (Ptr{aiMaterial}, Cstring, Cuint, Cuint, Ptr{Cint}, Ptr{Cuint}), pMat, pKey, type, index, pOut, pMax)
 end
 
 function aiGetMaterialColor(pMat, pKey, type, index, pOut)
-    ccall((:aiGetMaterialColor, libassimp), aiReturn, (Ptr{aiMaterial}, Cstring, UInt32, UInt32, Ptr{aiColor4D}), pMat, pKey, type, index, pOut)
+    ccall((:aiGetMaterialColor, libassimp), aiReturn, (Ptr{aiMaterial}, Cstring, Cuint, Cuint, Ptr{aiColor4D}), pMat, pKey, type, index, pOut)
 end
 
 function aiGetMaterialUVTransform(pMat, pKey, type, index, pOut)
-    ccall((:aiGetMaterialUVTransform, libassimp), aiReturn, (Ptr{aiMaterial}, Cstring, UInt32, UInt32, Ptr{aiUVTransform}), pMat, pKey, type, index, pOut)
+    ccall((:aiGetMaterialUVTransform, libassimp), aiReturn, (Ptr{aiMaterial}, Cstring, Cuint, Cuint, Ptr{aiUVTransform}), pMat, pKey, type, index, pOut)
 end
 
 function aiGetMaterialString(pMat, pKey, type, index, pOut)
-    ccall((:aiGetMaterialString, libassimp), aiReturn, (Ptr{aiMaterial}, Cstring, UInt32, UInt32, Ptr{aiString}), pMat, pKey, type, index, pOut)
+    ccall((:aiGetMaterialString, libassimp), aiReturn, (Ptr{aiMaterial}, Cstring, Cuint, Cuint, Ptr{aiString}), pMat, pKey, type, index, pOut)
 end
 
 function aiGetMaterialTextureCount(pMat, type)
-    ccall((:aiGetMaterialTextureCount, libassimp), UInt32, (Ptr{aiMaterial}, aiTextureType), pMat, type)
+    ccall((:aiGetMaterialTextureCount, libassimp), Cuint, (Ptr{aiMaterial}, aiTextureType), pMat, type)
 end
 
 function aiGetMaterialTexture(mat, type, index, path, mapping, uvindex, blend, op, mapmode, flags)
-    ccall((:aiGetMaterialTexture, libassimp), aiReturn, (Ptr{aiMaterial}, aiTextureType, UInt32, Ptr{aiString}, Ptr{aiTextureMapping}, Ptr{UInt32}, Ptr{ai_real}, Ptr{aiTextureOp}, Ptr{aiTextureMapMode}, Ptr{UInt32}), mat, type, index, path, mapping, uvindex, blend, op, mapmode, flags)
+    ccall((:aiGetMaterialTexture, libassimp), aiReturn, (Ptr{aiMaterial}, aiTextureType, Cuint, Ptr{aiString}, Ptr{aiTextureMapping}, Ptr{Cuint}, Ptr{ai_real}, Ptr{aiTextureOp}, Ptr{aiTextureMapMode}, Ptr{Cuint}), mat, type, index, path, mapping, uvindex, blend, op, mapmode, flags)
 end
 # Julia wrapper for header: scene.h
 # Automatically generated using Clang.jl
@@ -280,15 +280,15 @@ function aiGetLegalString()
 end
 
 function aiGetVersionMinor()
-    ccall((:aiGetVersionMinor, libassimp), UInt32, ())
+    ccall((:aiGetVersionMinor, libassimp), Cuint, ())
 end
 
 function aiGetVersionMajor()
-    ccall((:aiGetVersionMajor, libassimp), UInt32, ())
+    ccall((:aiGetVersionMajor, libassimp), Cuint, ())
 end
 
 function aiGetVersionRevision()
-    ccall((:aiGetVersionRevision, libassimp), UInt32, ())
+    ccall((:aiGetVersionRevision, libassimp), Cuint, ())
 end
 
 function aiGetBranchName()
@@ -296,5 +296,5 @@ function aiGetBranchName()
 end
 
 function aiGetCompileFlags()
-    ccall((:aiGetCompileFlags, libassimp), UInt32, ())
+    ccall((:aiGetCompileFlags, libassimp), Cuint, ())
 end
