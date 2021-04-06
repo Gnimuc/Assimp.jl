@@ -3,7 +3,7 @@ using Assimp.LibAssimp
 using Test
 
 function import_file_test(filename)
-    scene = aiImportFile(joinpath(@__DIR__, filename), 
+    scene = aiImportFile(joinpath(@__DIR__, filename),
                          aiProcess_CalcTangentSpace |
                          aiProcess_Triangulate |
                          aiProcess_JoinIdenticalVertices |
@@ -22,5 +22,3 @@ end
     @test import_file_test("test.fbx")
     @test import_file_test("test.stl")
 end
-
-

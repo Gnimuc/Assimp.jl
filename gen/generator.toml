@@ -6,3 +6,7 @@ jll_pkg_name = "assimp_jll"
 export_symbol_prefixes = ["ai", "AI"]
 prologue_file_path = ""
 header_blacklist = [".inl"]
+
+printer_blacklist = [
+    "AI_NO_EXCEPT",
+]
