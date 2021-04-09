@@ -142,31 +142,24 @@ struct aiMemoryInfo
     total::Cuint
 end
 
-# C code:
 # typedef size_t ( * aiFileWriteProc ) ( C_STRUCT aiFile * , const char * , size_t , size_t )
 const aiFileWriteProc = Ptr{Cvoid}
 
-# C code:
 # typedef size_t ( * aiFileReadProc ) ( C_STRUCT aiFile * , char * , size_t , size_t )
 const aiFileReadProc = Ptr{Cvoid}
 
-# C code:
 # typedef size_t ( * aiFileTellProc ) ( C_STRUCT aiFile * )
 const aiFileTellProc = Ptr{Cvoid}
 
-# C code:
 # typedef void ( * aiFileFlushProc ) ( C_STRUCT aiFile * )
 const aiFileFlushProc = Ptr{Cvoid}
 
-# C code:
 # typedef C_ENUM aiReturn ( * aiFileSeek ) ( C_STRUCT aiFile * , size_t , C_ENUM aiOrigin )
 const aiFileSeek = Ptr{Cvoid}
 
-# C code:
 # typedef C_STRUCT aiFile * ( * aiFileOpenProc ) ( C_STRUCT aiFileIO * , const char * , const char * )
 const aiFileOpenProc = Ptr{Cvoid}
 
-# C code:
 # typedef void ( * aiFileCloseProc ) ( C_STRUCT aiFileIO * , C_STRUCT aiFile * )
 const aiFileCloseProc = Ptr{Cvoid}
 
@@ -213,7 +206,6 @@ function aiGetImporterDesc(extension)
     ccall((:aiGetImporterDesc, libassimp), Ptr{aiImporterDesc}, (Ptr{Cchar},), extension)
 end
 
-# C code:
 # typedef void ( * aiLogStreamCallback ) ( const char * /* message */ , char * /* user */ )
 const aiLogStreamCallback = Ptr{Cvoid}
 
@@ -484,6 +476,11 @@ struct aiScene
     mCameras::Ptr{Ptr{aiCamera}}
     mMetaData::Ptr{aiMetadata}
     mPrivate::Ptr{Cchar}
+end
+
+function Base.getproperty(x::aiScene, f::Symbol)
+    f === :mRootNode && return Ptr{aiNode}(getfield(x, f))
+    return getfield(x, f)
 end
 
 function aiImportFile(pFile, pFlags)
