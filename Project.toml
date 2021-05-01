@@ -1,6 +1,6 @@
 name = "Assimp"
 uuid = "079381af-6941-5802-8ad5-fb13e7f1c93a"
-authors = ["Gnimuc <qiyupei@gmail.com>"]
+authors = ["Yupei Qi <qiyupei@gmail.com>"]
 version = "0.1.0"
 
 [deps]

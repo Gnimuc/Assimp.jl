@@ -885,14 +885,6 @@ function aiGetCompileFlags()
     ccall((:aiGetCompileFlags, libassimp), Cuint, ())
 end
 
-const AI_FILEIO_H_INC = nothing
-
-const AI_TYPES_H_INC = nothing
-
-const AI_DEFINES_H_INC = nothing
-
-const AI_CONFIG_H_INC = nothing
-
 const AI_CONFIG_GLOB_MEASURE_TIME = "GLOB_MEASURE_TIME"
 
 const AI_CONFIG_IMPORT_NO_SKELETON_MESHES = "IMPORT_NO_SKELETON_MESHES"
@@ -961,7 +953,7 @@ const AI_UVTRAFO_ROTATION = 0x02
 
 const AI_UVTRAFO_TRANSLATION = 0x04
 
-# Skipping MacroDefinition: AI_UVTRAFO_ALL ( AI_UVTRAFO_SCALING | AI_UVTRAFO_ROTATION | AI_UVTRAFO_TRANSLATION )
+const AI_UVTRAFO_ALL = (AI_UVTRAFO_SCALING | AI_UVTRAFO_ROTATION) | AI_UVTRAFO_TRANSLATION
 
 const AI_CONFIG_PP_TUV_EVALUATE = "PP_TUV_EVALUATE"
 
@@ -1067,15 +1059,7 @@ const AI_CONFIG_GLOBAL_SCALE_FACTOR_DEFAULT = Float32(1.0)
 
 const AI_CONFIG_APP_SCALE_KEY = "APP_SCALE_FACTOR"
 
-const ASSIMP_BUILD_NEED_Z_INFLATE = nothing
-
-const ASSIMP_BUILD_NEED_UNZIP = nothing
-
-const AI_WONT_RETURN = nothing
-
 # Skipping MacroDefinition: ASSIMP_API __attribute__ ( ( visibility ( "default" ) ) )
-
-const ASSIMP_API_WINONLY = nothing
 
 # Skipping MacroDefinition: AI_FORCE_INLINE inline
 
@@ -1085,35 +1069,21 @@ const ASSIMP_API_WINONLY = nothing
 
 # Skipping MacroDefinition: C_ENUM enum
 
-const ASSIMP_BUILD_SINGLETHREADED = nothing
-
-const ASSIMP_BUILD_DEBUG = nothing
-
 const ASSIMP_AI_REAL_TEXT_PRECISION = 8
 
 const AI_MATH_PI = 3.141592653589793
 
-# Skipping MacroDefinition: AI_MATH_TWO_PI ( AI_MATH_PI * 2.0 )
+const AI_MATH_TWO_PI = AI_MATH_PI * 2.0
 
-# Skipping MacroDefinition: AI_MATH_HALF_PI ( AI_MATH_PI * 0.5 )
+const AI_MATH_HALF_PI = AI_MATH_PI * 0.5
 
 const AI_MATH_PI_F = Float32(3.1415926538)
 
-# Skipping MacroDefinition: AI_MATH_TWO_PI_F ( AI_MATH_PI_F * 2.0f )
+const AI_MATH_TWO_PI_F = AI_MATH_PI_F * Float32(2.0)
 
-# Skipping MacroDefinition: AI_MATH_HALF_PI_F ( AI_MATH_PI_F * 0.5f )
+const AI_MATH_HALF_PI_F = AI_MATH_PI_F * Float32(0.5)
 
-const AI_VECTOR3D_H_INC = nothing
-
-const AI_VECTOR2D_H_INC = nothing
-
-const AI_COLOR4D_H_INC = nothing
-
-const AI_MATRIX3X3_H_INC = nothing
-
-const AI_MATRIX4X4_H_INC = nothing
-
-const AI_QUATERNION_H_INC = nothing
+# Skipping MacroDefinition: AI_NO_EXCEPT noexcept
 
 const MAXLEN = 1024
 
@@ -1131,31 +1101,15 @@ const DLS_STDERR = aiDefaultLogStream_STDERR
 
 const DLS_DEBUGGER = aiDefaultLogStream_DEBUGGER
 
-const AI_ASSIMP_H_INC = nothing
-
-const AI_IMPORTER_DESC_H_INC = nothing
-
 const AI_FALSE = 0
 
 const AI_TRUE = 1
-
-const AI_EXPORT_H_INC = nothing
-
-const AI_SCENE_H_INC = nothing
-
-const AI_TEXTURE_H_INC = nothing
 
 const AI_EMBEDDED_TEXNAME_PREFIX = "*"
 
 # Skipping MacroDefinition: PACK_STRUCT __attribute__ ( ( __packed__ ) )
 
-const AI_PUSHPACK_IS_DEFINED = nothing
-
 const HINTMAXTEXTURELEN = 9
-
-const AI_MESH_H_INC = nothing
-
-const AI_AABB_H_INC = nothing
 
 const AI_MAX_FACE_INDICES = Float32(0x07ff)
 
@@ -1169,67 +1123,61 @@ const AI_MAX_NUMBER_OF_COLOR_SETS = 0x08
 
 const AI_MAX_NUMBER_OF_TEXTURECOORDS = 0x08
 
-const AI_LIGHT_H_INC = nothing
-
-const AI_CAMERA_H_INC = nothing
-
-const AI_MATERIAL_H_INC = nothing
-
 const AI_DEFAULT_MATERIAL_NAME = "DefaultMaterial"
 
 const AI_TEXTURE_TYPE_MAX = aiTextureType_UNKNOWN
 
-# Skipping MacroDefinition: AI_MATKEY_NAME "?mat.name" , 0 , 0
+const AI_MATKEY_NAME = ("?mat.name", 0, 0)
 
-# Skipping MacroDefinition: AI_MATKEY_TWOSIDED "$mat.twosided" , 0 , 0
+const AI_MATKEY_TWOSIDED = ("\$mat.twosided", 0, 0)
 
-# Skipping MacroDefinition: AI_MATKEY_SHADING_MODEL "$mat.shadingm" , 0 , 0
+const AI_MATKEY_SHADING_MODEL = ("\$mat.shadingm", 0, 0)
 
-# Skipping MacroDefinition: AI_MATKEY_ENABLE_WIREFRAME "$mat.wireframe" , 0 , 0
+const AI_MATKEY_ENABLE_WIREFRAME = ("\$mat.wireframe", 0, 0)
 
-# Skipping MacroDefinition: AI_MATKEY_BLEND_FUNC "$mat.blend" , 0 , 0
+const AI_MATKEY_BLEND_FUNC = ("\$mat.blend", 0, 0)
 
-# Skipping MacroDefinition: AI_MATKEY_OPACITY "$mat.opacity" , 0 , 0
+const AI_MATKEY_OPACITY = ("\$mat.opacity", 0, 0)
 
-# Skipping MacroDefinition: AI_MATKEY_TRANSPARENCYFACTOR "$mat.transparencyfactor" , 0 , 0
+const AI_MATKEY_TRANSPARENCYFACTOR = ("\$mat.transparencyfactor", 0, 0)
 
-# Skipping MacroDefinition: AI_MATKEY_BUMPSCALING "$mat.bumpscaling" , 0 , 0
+const AI_MATKEY_BUMPSCALING = ("\$mat.bumpscaling", 0, 0)
 
-# Skipping MacroDefinition: AI_MATKEY_SHININESS "$mat.shininess" , 0 , 0
+const AI_MATKEY_SHININESS = ("\$mat.shininess", 0, 0)
 
-# Skipping MacroDefinition: AI_MATKEY_REFLECTIVITY "$mat.reflectivity" , 0 , 0
+const AI_MATKEY_REFLECTIVITY = ("\$mat.reflectivity", 0, 0)
 
-# Skipping MacroDefinition: AI_MATKEY_SHININESS_STRENGTH "$mat.shinpercent" , 0 , 0
+const AI_MATKEY_SHININESS_STRENGTH = ("\$mat.shinpercent", 0, 0)
 
-# Skipping MacroDefinition: AI_MATKEY_REFRACTI "$mat.refracti" , 0 , 0
+const AI_MATKEY_REFRACTI = ("\$mat.refracti", 0, 0)
 
-# Skipping MacroDefinition: AI_MATKEY_COLOR_DIFFUSE "$clr.diffuse" , 0 , 0
+const AI_MATKEY_COLOR_DIFFUSE = ("\$clr.diffuse", 0, 0)
 
-# Skipping MacroDefinition: AI_MATKEY_COLOR_AMBIENT "$clr.ambient" , 0 , 0
+const AI_MATKEY_COLOR_AMBIENT = ("\$clr.ambient", 0, 0)
 
-# Skipping MacroDefinition: AI_MATKEY_COLOR_SPECULAR "$clr.specular" , 0 , 0
+const AI_MATKEY_COLOR_SPECULAR = ("\$clr.specular", 0, 0)
 
-# Skipping MacroDefinition: AI_MATKEY_COLOR_EMISSIVE "$clr.emissive" , 0 , 0
+const AI_MATKEY_COLOR_EMISSIVE = ("\$clr.emissive", 0, 0)
 
-# Skipping MacroDefinition: AI_MATKEY_COLOR_TRANSPARENT "$clr.transparent" , 0 , 0
+const AI_MATKEY_COLOR_TRANSPARENT = ("\$clr.transparent", 0, 0)
 
-# Skipping MacroDefinition: AI_MATKEY_COLOR_REFLECTIVE "$clr.reflective" , 0 , 0
+const AI_MATKEY_COLOR_REFLECTIVE = ("\$clr.reflective", 0, 0)
 
-# Skipping MacroDefinition: AI_MATKEY_GLOBAL_BACKGROUND_IMAGE "?bg.global" , 0 , 0
+const AI_MATKEY_GLOBAL_BACKGROUND_IMAGE = ("?bg.global", 0, 0)
 
-# Skipping MacroDefinition: AI_MATKEY_GLOBAL_SHADERLANG "?sh.lang" , 0 , 0
+const AI_MATKEY_GLOBAL_SHADERLANG = ("?sh.lang", 0, 0)
 
-# Skipping MacroDefinition: AI_MATKEY_SHADER_VERTEX "?sh.vs" , 0 , 0
+const AI_MATKEY_SHADER_VERTEX = ("?sh.vs", 0, 0)
 
-# Skipping MacroDefinition: AI_MATKEY_SHADER_FRAGMENT "?sh.fs" , 0 , 0
+const AI_MATKEY_SHADER_FRAGMENT = ("?sh.fs", 0, 0)
 
-# Skipping MacroDefinition: AI_MATKEY_SHADER_GEO "?sh.gs" , 0 , 0
+const AI_MATKEY_SHADER_GEO = ("?sh.gs", 0, 0)
 
-# Skipping MacroDefinition: AI_MATKEY_SHADER_TESSELATION "?sh.ts" , 0 , 0
+const AI_MATKEY_SHADER_TESSELATION = ("?sh.ts", 0, 0)
 
-# Skipping MacroDefinition: AI_MATKEY_SHADER_PRIMITIVE "?sh.ps" , 0 , 0
+const AI_MATKEY_SHADER_PRIMITIVE = ("?sh.ps", 0, 0)
 
-# Skipping MacroDefinition: AI_MATKEY_SHADER_COMPUTE "?sh.cs" , 0 , 0
+const AI_MATKEY_SHADER_COMPUTE = ("?sh.cs", 0, 0)
 
 const _AI_MATKEY_TEXTURE_BASE = "\$tex.file"
 
@@ -1251,14 +1199,6 @@ const _AI_MATKEY_UVTRANSFORM_BASE = "\$tex.uvtrafo"
 
 const _AI_MATKEY_TEXFLAGS_BASE = "\$tex.flags"
 
-# Skipping MacroDefinition: aiGetMaterialFloat ( pMat , type , index , pKey , pOut ) aiGetMaterialFloatArray ( pMat , type , index , pKey , pOut , NULL )
-
-# Skipping MacroDefinition: aiGetMaterialInteger ( pMat , type , index , pKey , pOut ) aiGetMaterialIntegerArray ( pMat , type , index , pKey , pOut , NULL )
-
-const AI_ANIM_H_INC = nothing
-
-const AI_METADATA_H_INC = nothing
-
 const AI_SCENE_FLAGS_INCOMPLETE = 0x01
 
 const AI_SCENE_FLAGS_VALIDATED = 0x02
@@ -1271,37 +1211,33 @@ const AI_SCENE_FLAGS_TERRAIN = 0x10
 
 const AI_SCENE_FLAGS_ALLOW_SHARED = 0x20
 
-const AI_POSTPROCESS_H_INC = nothing
+const aiProcess_ConvertToLeftHanded = ((aiProcess_MakeLeftHanded | aiProcess_FlipUVs) | aiProcess_FlipWindingOrder) | 0
 
-# Skipping MacroDefinition: aiProcess_ConvertToLeftHanded ( aiProcess_MakeLeftHanded | aiProcess_FlipUVs | aiProcess_FlipWindingOrder | 0 )
+const aiProcessPreset_TargetRealtime_Fast = (((((aiProcess_CalcTangentSpace | aiProcess_GenNormals) | aiProcess_JoinIdenticalVertices) | aiProcess_Triangulate) | aiProcess_GenUVCoords) | aiProcess_SortByPType) | 0
 
-# Skipping MacroDefinition: aiProcessPreset_TargetRealtime_Fast ( aiProcess_CalcTangentSpace | aiProcess_GenNormals | aiProcess_JoinIdenticalVertices | aiProcess_Triangulate | aiProcess_GenUVCoords | aiProcess_SortByPType | 0 )
+const aiProcessPreset_TargetRealtime_Quality = (((((((((((aiProcess_CalcTangentSpace | aiProcess_GenSmoothNormals) | aiProcess_JoinIdenticalVertices) | aiProcess_ImproveCacheLocality) | aiProcess_LimitBoneWeights) | aiProcess_RemoveRedundantMaterials) | aiProcess_SplitLargeMeshes) | aiProcess_Triangulate) | aiProcess_GenUVCoords) | aiProcess_SortByPType) | aiProcess_FindDegenerates) | aiProcess_FindInvalidData) | 0
 
-# Skipping MacroDefinition: aiProcessPreset_TargetRealtime_Quality ( aiProcess_CalcTangentSpace | aiProcess_GenSmoothNormals | aiProcess_JoinIdenticalVertices | aiProcess_ImproveCacheLocality | aiProcess_LimitBoneWeights | aiProcess_RemoveRedundantMaterials | aiProcess_SplitLargeMeshes | aiProcess_Triangulate | aiProcess_GenUVCoords | aiProcess_SortByPType | aiProcess_FindDegenerates | aiProcess_FindInvalidData | 0 )
+const aiProcessPreset_TargetRealtime_MaxQuality = (((aiProcessPreset_TargetRealtime_Quality | aiProcess_FindInstances) | aiProcess_ValidateDataStructure) | aiProcess_OptimizeMeshes) | 0
 
-# Skipping MacroDefinition: aiProcessPreset_TargetRealtime_MaxQuality ( aiProcessPreset_TargetRealtime_Quality | aiProcess_FindInstances | aiProcess_ValidateDataStructure | aiProcess_OptimizeMeshes | 0 )
+const AI_MATKEY_GLTF_PBRMETALLICROUGHNESS_BASE_COLOR_FACTOR = ("\$mat.gltf.pbrMetallicRoughness.baseColorFactor", 0, 0)
 
-const AI_PBRMATERIAL_H_INC = nothing
+const AI_MATKEY_GLTF_PBRMETALLICROUGHNESS_METALLIC_FACTOR = ("\$mat.gltf.pbrMetallicRoughness.metallicFactor", 0, 0)
 
-# Skipping MacroDefinition: AI_MATKEY_GLTF_PBRMETALLICROUGHNESS_BASE_COLOR_FACTOR "$mat.gltf.pbrMetallicRoughness.baseColorFactor" , 0 , 0
+const AI_MATKEY_GLTF_PBRMETALLICROUGHNESS_ROUGHNESS_FACTOR = ("\$mat.gltf.pbrMetallicRoughness.roughnessFactor", 0, 0)
 
-# Skipping MacroDefinition: AI_MATKEY_GLTF_PBRMETALLICROUGHNESS_METALLIC_FACTOR "$mat.gltf.pbrMetallicRoughness.metallicFactor" , 0 , 0
+const AI_MATKEY_GLTF_PBRMETALLICROUGHNESS_BASE_COLOR_TEXTURE = (aiTextureType_DIFFUSE, 1)
 
-# Skipping MacroDefinition: AI_MATKEY_GLTF_PBRMETALLICROUGHNESS_ROUGHNESS_FACTOR "$mat.gltf.pbrMetallicRoughness.roughnessFactor" , 0 , 0
+const AI_MATKEY_GLTF_PBRMETALLICROUGHNESS_METALLICROUGHNESS_TEXTURE = (aiTextureType_UNKNOWN, 0)
 
-# Skipping MacroDefinition: AI_MATKEY_GLTF_PBRMETALLICROUGHNESS_BASE_COLOR_TEXTURE aiTextureType_DIFFUSE , 1
+const AI_MATKEY_GLTF_ALPHAMODE = ("\$mat.gltf.alphaMode", 0, 0)
 
-# Skipping MacroDefinition: AI_MATKEY_GLTF_PBRMETALLICROUGHNESS_METALLICROUGHNESS_TEXTURE aiTextureType_UNKNOWN , 0
+const AI_MATKEY_GLTF_ALPHACUTOFF = ("\$mat.gltf.alphaCutoff", 0, 0)
 
-# Skipping MacroDefinition: AI_MATKEY_GLTF_ALPHAMODE "$mat.gltf.alphaMode" , 0 , 0
+const AI_MATKEY_GLTF_PBRSPECULARGLOSSINESS = ("\$mat.gltf.pbrSpecularGlossiness", 0, 0)
 
-# Skipping MacroDefinition: AI_MATKEY_GLTF_ALPHACUTOFF "$mat.gltf.alphaCutoff" , 0 , 0
+const AI_MATKEY_GLTF_PBRSPECULARGLOSSINESS_GLOSSINESS_FACTOR = ("\$mat.gltf.pbrMetallicRoughness.glossinessFactor", 0, 0)
 
-# Skipping MacroDefinition: AI_MATKEY_GLTF_PBRSPECULARGLOSSINESS "$mat.gltf.pbrSpecularGlossiness" , 0 , 0
-
-# Skipping MacroDefinition: AI_MATKEY_GLTF_PBRSPECULARGLOSSINESS_GLOSSINESS_FACTOR "$mat.gltf.pbrMetallicRoughness.glossinessFactor" , 0 , 0
-
-# Skipping MacroDefinition: AI_MATKEY_GLTF_UNLIT "$mat.gltf.unlit" , 0 , 0
+const AI_MATKEY_GLTF_UNLIT = ("\$mat.gltf.unlit", 0, 0)
 
 const _AI_MATKEY_GLTF_TEXTURE_TEXCOORD_BASE = "\$tex.file.texCoord"
 
@@ -1316,8 +1252,6 @@ const _AI_MATKEY_GLTF_MAPPINGFILTER_MIN_BASE = "\$tex.mappingfiltermin"
 const _AI_MATKEY_GLTF_SCALE_BASE = "\$tex.scale"
 
 const _AI_MATKEY_GLTF_STRENGTH_BASE = "\$tex.strength"
-
-const AI_VERSION_H_INC = nothing
 
 const ASSIMP_CFLAGS_SHARED = 0x01
 
