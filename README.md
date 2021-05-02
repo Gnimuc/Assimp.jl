@@ -14,21 +14,19 @@ pkg> add Assimp
 ```
 using Assimp.LibAssimp
 
-function import_file(path)
-    scene = aiImportFile(path,
-                         aiProcess_CalcTangentSpace |
-                         aiProcess_Triangulate |
-                         aiProcess_JoinIdenticalVertices |
-                         aiProcess_SortByPType
-                        )
-    if scene == C_NULL
-        @error aiGetErrorString() |> unsafe_string
-        return false
-    end
-    aiReleaseImport(scene)
-    return true
+# load asset
+scene = aiImportFile("/your/file/path/xxx.glb",
+                     aiProcess_CalcTangentSpace |
+                     aiProcess_Triangulate |
+                     aiProcess_JoinIdenticalVertices |
+                     aiProcess_SortByPType)
+    
+if scene == C_NULL
+    @error aiGetErrorString() |> unsafe_string
 end
 
-import_file("/your/file/path/xxx.glb")
+# do something
 
+# clean up
+aiReleaseImport(scene)
 ```
