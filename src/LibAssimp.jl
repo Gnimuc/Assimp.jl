@@ -1265,11 +1265,9 @@ const ASSIMP_CFLAGS_SINGLETHREADED = 0x10
 
 # exports
 const PREFIXES = ["ai", "AI"]
-foreach(names(@__MODULE__; all=true)) do s
-    for prefix in PREFIXES
-        if startswith(string(s), prefix)
-            @eval export $s
-        end
+for name in names(@__MODULE__; all=true), prefix in PREFIXES
+    if startswith(string(name), prefix)
+        @eval export $name
     end
 end
 
