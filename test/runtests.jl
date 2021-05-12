@@ -2,6 +2,12 @@ using Assimp
 using Assimp.LibAssimp
 using Test
 
+@testset "System Trivial" begin
+    @show Sys.iswindows()
+    @show Sys.ARCH
+    @test Sys.ARCH === ccall(:jl_get_ARCH, Any, ())
+end
+
 function import_file_test(filename)
     scene = aiImportFile(joinpath(@__DIR__, filename),
                          aiProcess_CalcTangentSpace |
