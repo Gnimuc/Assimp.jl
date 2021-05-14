@@ -1111,13 +1111,13 @@ const AI_EMBEDDED_TEXNAME_PREFIX = "*"
 
 const HINTMAXTEXTURELEN = 9
 
-const AI_MAX_FACE_INDICES = Float32(0x07ff)
+const AI_MAX_FACE_INDICES = 0x7fff
 
-const AI_MAX_BONE_WEIGHTS = Float32(0x07ffffff)
+const AI_MAX_BONE_WEIGHTS = 0x7fffffff
 
-const AI_MAX_VERTICES = Float32(0x07ffffff)
+const AI_MAX_VERTICES = 0x7fffffff
 
-const AI_MAX_FACES = Float32(0x07ffffff)
+const AI_MAX_FACES = 0x7fffffff
 
 const AI_MAX_NUMBER_OF_COLOR_SETS = 0x08
 
